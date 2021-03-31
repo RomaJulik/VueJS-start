@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link rel="stylesheet" href="./css/theme.css" />
+  </head>
+  <body>
+    <div class="container" id="app">
+      <div class="card center">
+        <h1>{{ appTitle }}</h1>
+        <div class="form-control">
+          <input
+            type="text"
+            :placeholder="placeholderString"
+            v-model="inputValue"
+            @keypress.Enter="addNewTodo"
+          />
+        </div>
+
+        <div class="wrap-nav">
+          <div class="btn" @click="addNewTodo">Add</div>
+          <div class="count" v-if="(todoList.length) < 10">
+            Количество дел на сегодня: <span>0{{ todoList.length }}</span>
+          </div>
+          <div class="count" v-else>
+            Количество дел на сегодня: <span>{{ todoList.length }}</span>
+          </div>
+        </div>
+
+        <hr />
+
+        <ul class="list" v-if="todoList.length !== 0">
+          <li class="list-item" v-for:="(myTodo, index) in todoList">
+            <input type="checkbox" name="chekbox" :id="index" />
+            {{ myTodo }}
+            <button class="btn danger" @click="removeTodo(index)">
+              Remove
+            </button>
+          </li>
+        </ul>
+        <div class="no-todo" v-else>{{ noTodo }}</div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
