@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue Basics</title>
+    <title>Vue Todo</title>
     <link rel="stylesheet" href="./css/theme.css" />
   </head>
   <body>
@@ -21,10 +21,7 @@
 
         <div class="wrap-nav">
           <div class="btn" @click="addNewTodo">Add</div>
-          <div class="count" v-if="(todoList.length) < 10">
-            Количество дел на сегодня: <span>0{{ todoList.length }}</span>
-          </div>
-          <div class="count" v-else>
+          <div class="count">
             Количество дел на сегодня: <span>{{ todoList.length }}</span>
           </div>
         </div>
@@ -33,7 +30,7 @@
 
         <ul class="list" v-if="todoList.length !== 0">
           <li class="list-item" v-for:="(myTodo, index) in todoList">
-            <input type="checkbox" name="chekbox" :id="index" />
+            <input class="custom-checkbox" type="checkbox" name="checkbox" :id="index" />
             {{ myTodo }}
             <button class="btn danger" @click="removeTodo(index)">
               Remove
