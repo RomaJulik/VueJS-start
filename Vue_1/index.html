@@ -18,8 +18,12 @@
             v-model.trim="inputValue"
             @keypress.Enter="addNewTodo"
           />
+
+          <div class="main-btn">
+            <button class="btn" @click="addNewTodo">Add</button>
+            <button class="btn danger" @click="clearAllTodo">Clear All</button>
+          </div>
         </div>
-        <button class="btn" @click="addNewTodo">Add</button>
 
         <!-- Todo List -->
         <div class="todo-list" v-if="needDoList.length !== 0">
@@ -28,31 +32,45 @@
           </div>
           <h3>Need Do</h3>
           <ul class="list">
-            <li class="list-item" v-for:="(myTodo, index, id) in needDoList" :key="myTodo.id">
-              <input type="checkbox" :checked = "myTodo.checked" @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)" />
+            <li
+              class="list-item"
+              v-for:="(myTodo, index, id) in needDoList"
+              :key="myTodo.id"
+            >
+              <input
+                type="checkbox"
+                :checked="myTodo.checked"
+                @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)"
+              />
               {{ myTodo.title }}
-              <button class="btn danger" @click="removeTodo(index)">
+              <button class="btn danger" @click="removeNeedTodo(index)">
                 Remove
               </button>
             </li>
           </ul>
         </div>
-        
+
         <!-- Done Todo -->
-        
+
         <div class="todo-done" v-if="completeList.length !== 0">
           <div class="done-count">
             Количество сделаных дел: <span> {{ completeList.length }} </span>
           </div>
           <h3>Done</h3>
-          
+
           <ul class="list done">
-            <li class="list-item" v-for:="(myTodo, index, id) in completeList" :key="myTodo.id">
-              <input type="checkbox" :checked = "myTodo.checked" @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)" />
-              <span>{{ myTodo.title }}</span>              
-              <button class="btn danger" @click="removeTodo(index)">
-                Remove
-              </button>
+            <li
+              class="list-item"
+              v-for:="(myTodo, index, id) in completeList"
+              :key="myTodo.id"
+            >
+              <input
+                type="checkbox"
+                :checked="myTodo.checked"
+                @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)"
+              />
+              <span>{{ myTodo.title }}</span>
+              <button class="btn danger" @click="removeDoneTodo">Remove</button>
             </li>
           </ul>
         </div>
