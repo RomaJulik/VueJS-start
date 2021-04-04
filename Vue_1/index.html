@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/theme.css" />
   </head>
   <body>
+    <!-- Header -->
     <div class="container" id="app">
       <div class="card center">
         <h1>{{ appTitle }}</h1>
@@ -14,30 +15,55 @@
           <input
             type="text"
             :placeholder="placeholderString"
-            v-model="inputValue"
+            v-model.trim="inputValue"
             @keypress.Enter="addNewTodo"
           />
         </div>
+        <button class="btn" @click="addNewTodo">Add</button>
 
-        <div class="wrap-nav">
-          <div class="btn" @click="addNewTodo">Add</div>
+        <!-- Todo List -->
+        <div class="todo-list" v-if="needDoList.length !== 0">
           <div class="count">
-            Количество дел на сегодня: <span>{{ todoList.length }}</span>
+            Количество дел на сегодня: <span>{{ needDoList.length }}</span>
           </div>
+          <h3>Need Do</h3>
+          <ul class="list">
+            <li class="list-item" v-for:="(myTodo, index, id) in needDoList" :key="myTodo.id">
+              <input type="checkbox" :checked = "myTodo.checked" @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)" />
+              {{ myTodo.title }}
+              <button class="btn danger" @click="removeTodo(index)">
+                Remove
+              </button>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Done Todo -->
+        
+        <div class="todo-done" v-if="completeList.length !== 0">
+          <div class="done-count">
+            Количество сделаных дел: <span> {{ completeList.length }} </span>
+          </div>
+          <h3>Done</h3>
+          
+          <ul class="list done">
+            <li class="list-item" v-for:="(myTodo, index, id) in completeList" :key="myTodo.id">
+              <input type="checkbox" :checked = "myTodo.checked" @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)" />
+              <span>{{ myTodo.title }}</span>              
+              <button class="btn danger" @click="removeTodo(index)">
+                Remove
+              </button>
+            </li>
+          </ul>
         </div>
 
-        <hr />
-
-        <ul class="list" v-if="todoList.length !== 0">
-          <li class="list-item" v-for:="(myTodo, index) in todoList">
-            <input class="custom-checkbox" type="checkbox" name="checkbox" :id="index" />
-            {{ myTodo }}
-            <button class="btn danger" @click="removeTodo(index)">
-              Remove
-            </button>
-          </li>
-        </ul>
-        <div class="no-todo" v-else>{{ noTodo }}</div>
+        <!-- If No Todo -->
+        <div
+          class="no-todo"
+          v-if="completeList.length === 0 && needDoList.length === 0"
+        >
+          {{ noTodo }}
+        </div>
       </div>
     </div>
 

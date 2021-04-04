@@ -72,7 +72,7 @@ h3 {
   position: relative;
   place-content: center;
   place-items: center;
-  width: fit-content;
+  width: 200px;
   border-radius: 99px;
   letter-spacing: 0.05em;
   border: 1px solid #42b983;
@@ -109,10 +109,6 @@ h3 {
 .container {
   margin: 0 auto;
   max-width: 1000px;
-}
-
-.pt-5 {
-  padding-top: 5rem;
 }
 
 .form-control {
@@ -163,6 +159,18 @@ h3 {
   align-items: stretch;
 }
 
+.todo-list>h3 {
+  display: flex;
+  justify-content: start;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.todo-done > h3 {
+  display: flex;
+  justify-content: start;
+  border-bottom: 1px solid #2c3e50;
+}
+
 .list {
   margin: 0;
   padding: 0;
@@ -196,13 +204,17 @@ h3 {
   padding: 0 50px;
 }
 
-.count {
+.count,
+.done-count{
   color: #3eaf7c;
   display: flex;
   align-items: center;
+  justify-content:flex-end;
+  padding: 0 50px;
 }
 
-.count > span {
+.count > span,
+.done-count > span {
   border: 2px solid black;
   border-radius: 50%;
   color: black;
@@ -216,4 +228,10 @@ h3 {
   height: 40px;
 }
 
+.done {
+  opacity: 0.5;
+}
 
+.checkbox{
+  user-select: none
+}
