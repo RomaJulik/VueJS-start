@@ -8,7 +8,7 @@
   </head>
   <body>
     <!-- Header -->
-    <div class="container" id="app">
+    <div class="container" id="app" v-cloak>
       <div class="card center">
         <h1>{{ appTitle }}</h1>
         <div class="form-control">
@@ -34,7 +34,7 @@
           <ul class="list">
             <li
               class="list-item"
-              v-for:="(myTodo, index, id) in needDoList"
+              v-for:="(myTodo, index) in needDoList"
               :key="myTodo.id"
             >
               <input
@@ -43,7 +43,7 @@
                 @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)"
               />
               {{ myTodo.title }}
-              <button class="btn danger" @click="removeNeedTodo(index)">
+              <button class="btn danger" @click="remove(index, 'needDoList')">
                 Remove
               </button>
             </li>
@@ -61,7 +61,7 @@
           <ul class="list done">
             <li
               class="list-item"
-              v-for:="(myTodo, index, id) in completeList"
+              v-for:="(myTodo, index) in completeList"
               :key="myTodo.id"
             >
               <input
@@ -70,7 +70,9 @@
                 @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)"
               />
               <span>{{ myTodo.title }}</span>
-              <button class="btn danger" @click="removeDoneTodo">Remove</button>
+              <button class="btn danger" @click="remove(index, 'completeList')">
+                Remove
+              </button>
             </li>
           </ul>
         </div>
