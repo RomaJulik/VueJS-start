@@ -121,7 +121,7 @@ h3 {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 30px;
+  margin: 30px 0;
 }
 
 .form-control input {
@@ -212,6 +212,13 @@ h3 {
   padding: 0 50px;
 }
 
+.header-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
 .count,
 .done-count {
   color: #3eaf7c;
@@ -219,7 +226,6 @@ h3 {
   align-items: center;
   justify-content: flex-end;
   padding: 0 50px;
-  margin-top: 50px;
 }
 
 .count > span,

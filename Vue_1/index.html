@@ -27,8 +27,13 @@
 
         <!-- Todo List -->
         <div class="todo-list" v-if="needDoList.length !== 0">
-          <div class="count">
-            Количество дел на сегодня: <span>{{ needDoList.length }}</span>
+          <div class="header-list">
+            <button class="btn" @click="changeStatus">
+              Ascept
+            </button>
+            <div class="count">
+              Количество дел на сегодня: <span>{{ needDoList.length }}</span>
+            </div>
           </div>
           <h3>Need Do</h3>
           <ul class="list">
@@ -40,7 +45,7 @@
               <input
                 type="checkbox"
                 :checked="myTodo.checked"
-                @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)"
+                @change="myTodo.checked = !myTodo.checked"
               />
               {{ myTodo.title }}
               <button class="btn danger" @click="remove(index, 'needDoList')">
@@ -67,7 +72,7 @@
               <input
                 type="checkbox"
                 :checked="myTodo.checked"
-                @change="myTodo.checked = !myTodo.checked; doCheck(myTodo.checked, index)"
+                @change="myTodo.checked = !myTodo.checked"
               />
               <span>{{ myTodo.title }}</span>
               <button class="btn danger" @click="remove(index, 'completeList')">

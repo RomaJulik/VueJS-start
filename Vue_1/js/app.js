@@ -9,6 +9,7 @@ const App = {
             placeholderString: "Введите дело которое нужно сделать...",
             noTodo: 'Место для ваших задач',
             id: 0,
+            map: new Map()
         }
 
 
@@ -39,6 +40,17 @@ const App = {
                 this.inputValue = ''
             }
 
+        },
+
+        changeStatus() {
+            const checkedStatus = this.needDoList.filter(item => {
+                if (item.checked === true) {
+                    return item
+                }
+            })
+            const comleteTodo = checkedStatus.splice(0)
+            this.completeList.push(...comleteTodo)
+            console.log(comleteTodo);
         },
 
         remove(index, store) {
