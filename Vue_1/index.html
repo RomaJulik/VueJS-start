@@ -28,14 +28,13 @@
         <!-- Todo List -->
         <div class="todo-list" v-if="needDoList.length !== 0">
           <div class="header-list">
-            <button class="btn" @click="changeStatus">
-              Ascept
-            </button>
+            <button class="btn" @click="changeStatus">Ascept</button>
             <div class="count">
               Количество дел на сегодня: <span>{{ needDoList.length }}</span>
             </div>
           </div>
           <h3>Need Do</h3>
+
           <ul class="list">
             <li
               class="list-item"
@@ -58,8 +57,17 @@
         <!-- Done Todo -->
 
         <div class="todo-done" v-if="completeList.length !== 0">
-          <div class="done-count">
-            Количество сделаных дел: <span> {{ completeList.length }} </span>
+          <div class="header-list">
+            <button
+              class="btn"
+              @click="changeStatus"
+              :style="{opacity: needDoList.length !== 0 ? 0 : 1}"
+            >
+              Ascept
+            </button>
+            <div class="done-count">
+              Количество сделаных дел: <span> {{ completeList.length }} </span>
+            </div>
           </div>
           <h3>Done</h3>
 
