@@ -1,106 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue Todo</title>
-    <link rel="stylesheet" href="./css/theme.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <div class="container" id="app" v-cloak>
-      <div class="card center">
-        <h1>{{ appTitle }}</h1>
-        <div class="form-control">
-          <input
-            type="text"
-            :placeholder="placeholderString"
-            v-model.trim="inputValue"
-            @keypress.Enter="addNewTodo"
-          />
 
-          <div class="main-btn">
-            <button class="btn" @click="addNewTodo">Add</button>
-            <button class="btn danger" @click="clearAllTodo">Clear All</button>
-          </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue Todo</title>
+  <link rel="stylesheet" href="./css/theme.css" />
+</head>
 
-        <!-- Todo List -->
-        <div class="todo-list" v-if="needDoList.length !== 0">
-          <div class="header-list">
-            <button class="btn" @click="changeStatus">Ascept</button>
-            <div class="count">
-              Количество дел на сегодня: <span>{{ needDoList.length }}</span>
-            </div>
-          </div>
-          <h3>Need Do</h3>
+<body>
+  <!-- Header -->
+  <div class="container" id="app" v-cloak>
+    <div class="card center">
+      <h1>{{ appTitle }}</h1>
+      <div class="form-control">
+        <input type="text" :placeholder="placeholderString" v-model.trim="inputValue" @keypress.Enter="addNewTodo" />
 
-          <ul class="list">
-            <li
-              class="list-item"
-              v-for:="(myTodo, index) in needDoList"
-              :key="myTodo.id"
-            >
-              <input
-                type="checkbox"
-                :checked="myTodo.checked"
-                @change="myTodo.checked = !myTodo.checked"
-              />
-              {{ myTodo.title }}
-              <button class="btn danger" @click="remove(index, 'needDoList')">
-                Remove
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Done Todo -->
-
-        <div class="todo-done" v-if="completeList.length !== 0">
-          <div class="header-list">
-            <button
-              class="btn"
-              @click="changeStatus"
-              :style="{opacity: needDoList.length !== 0 ? 0 : 1}"
-            >
-              Ascept
-            </button>
-            <div class="done-count">
-              Количество сделаных дел: <span> {{ completeList.length }} </span>
-            </div>
-          </div>
-          <h3>Done</h3>
-
-          <ul class="list done">
-            <li
-              class="list-item"
-              v-for:="(myTodo, index) in completeList"
-              :key="myTodo.id"
-            >
-              <input
-                type="checkbox"
-                :checked="myTodo.checked"
-                @change="myTodo.checked = !myTodo.checked"
-              />
-              <span>{{ myTodo.title }}</span>
-              <button class="btn danger" @click="remove(index, 'completeList')">
-                Remove
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <!-- If No Todo -->
-        <div
-          class="no-todo"
-          v-if="completeList.length === 0 && needDoList.length === 0"
-        >
-          {{ noTodo }}
+        <div class="main-btn">
+          <button class="btn" @click="addNewTodo">Add</button>
+          <button class="btn danger" @click="clearAllTodo">Clear All</button>
         </div>
       </div>
-    </div>
 
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="./js/app.js"></script>
-  </body>
+      <!-- Todo List -->
+      <div class="todo-list" v-if="needDoList.length !== 0">
+        <div class="header-list">
+          <button class="btn primary" @click="changeStatus">Ascept</button>
+          <div class="count">
+            Количество дел на сегодня: <span>{{ needDoList.length }}</span>
+          </div>
+        </div>
+        <h3>Need Do</h3>
+
+        <ul class="list">
+          <li class="list-item" v-for:="(myTodo, index) in needDoList" :key="myTodo.id">
+            <input type="checkbox" :checked="myTodo.checked" @change="myTodo.checked = !myTodo.checked" />
+            {{ myTodo.title }}
+            <button class="btn danger" @click="remove(index, 'needDoList')">
+              Remove
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Done Todo -->
+
+      <div class="todo-done" v-if="completeList.length !== 0">
+        <div class="header-list">
+          <button class="btn primary" @click="changeStatus" :style="{opacity: needDoList.length !== 0 ? 0 : 1}">
+            Ascept
+          </button>
+          <div class="done-count">
+            Количество сделаных дел: <span> {{ completeList.length }} </span>
+          </div>
+        </div>
+        <h3>Done</h3>
+
+        <ul class="list done">
+          <li class="list-item" v-for:="(myTodo, index) in completeList" :key="myTodo.id">
+            <input type="checkbox" :checked="myTodo.checked" @change="myTodo.checked = !myTodo.checked" />
+            <span>{{ myTodo.title }}</span>
+            <button class="btn danger" @click="remove(index, 'completeList')">
+              Remove
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- If No Todo -->
+      <div class="no-todo" v-if="completeList.length === 0 && needDoList.length === 0">
+        {{ noTodo }}
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="./js/app.js"></script>
+</body>
+
 </html>
