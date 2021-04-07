@@ -47,7 +47,7 @@
 
       <div class="todo-done" v-if="completeList.length !== 0">
         <div class="header-list">
-          <button class="btn primary" @click="changeStatus" :style="{opacity: needDoList.length !== 0 ? 0 : 1}">
+          <button class="btn primary" @click="changeStatus" v-show="needDoList.length === 0">
             Ascept
           </button>
           <div class="done-count">
